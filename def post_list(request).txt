@@ -1,0 +1,303 @@
+def post_list(request):
+    today = timezone.now()
+
+    # Filter for today's posts
+    today_posts = Post.objects.filter(created_date__date=today.date())
+
+    # Filter for the current week posts
+    week_start = today - timedelta(days=today.weekday())  # Start of the week (Monday)
+    week_end = week_start + timedelta(days=6)  # End of the week (Sunday)
+    week_posts = Post.objects.filter(created_date__date__range=[week_start, week_end])
+
+    # Filter for the current month posts
+    month_posts = Post.objects.filter(
+        created_date__year=today.year,
+        created_date__month=today.month
+    )
+
+    # Aggregating posts by day (for daily graph)
+    daily_data = today_posts.annotate(date=TruncDate('created_date')).values('date').annotate(count=Count('id')).order_by('date')
+    
+    # Aggregating posts by week (for weekly graph)
+    weekly_data = week_posts.annotate(date=TruncDate('created_date')).values('date').annotate(count=Count('id')).order_by('date')
+
+    # Aggregating posts by month (for monthly graph)
+    monthly_data = month_posts.annotate(date=TruncDate('created_date')).values('date').annotate(count=Count('id')).order_by('date')
+
+    context = {
+        'daily_data': list(daily_data),
+        'weekly_data': list(weekly_data),
+        'monthly_data': list(monthly_data),
+        
+    }                 
+    # print(list(daily_data))
+    # print(list(weekly_data))
+    # print(list(monthly_data))
+        
+
+    return render(request, 'blog/post_list1.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <style>
+        canvas {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Post Creation Data - Daily, Weekly, Monthly</h1>
+
+<!-- Daily Chart -->
+<h3>Daily Posts</h3>
+<canvas id="dailyChart" style="width:100%;max-width:600px"></canvas>
+
+<!-- Weekly Chart -->
+<h3>Weekly Posts</h3>
+<canvas id="weeklyChart" style="width:100%;max-width:600px"></canvas>
+
+<!-- Monthly Chart -->
+<h3>Monthly Posts</h3>
+<canvas id="monthlyChart" style="width:100%;max-width:600px"></canvas>
+
+<script>
+    // Daily Data - Use Django's template system to generate the arrays
+    const dailyLabels = [{% for item in daily_data %}'{{ item.date }}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+    const dailyCounts = [{% for item in daily_data %}{{ item.count }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+
+    // Weekly Data
+    const weeklyLabels = [{% for item in weekly_data %}'{{ item.date }}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+    const weeklyCounts = [{% for item in weekly_data %}{{ item.count }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+
+    // Monthly Data
+    const monthlyLabels = [{% for item in monthly_data %}'{{ item.date }}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+    const monthlyCounts = [{% for item in monthly_data %}{{ item.count }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+
+    // Daily chart
+    new Chart("dailyChart", {
+        type: "line",
+        data: {
+            labels: dailyLabels,
+            datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,0,255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: dailyCounts
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                yAxes: [{ticks: {beginAtZero: true}}],
+            }
+        }
+    });
+
+    // Weekly chart
+    new Chart("weeklyChart", {
+        type: "line",
+        data: {
+            labels: weeklyLabels,
+            datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,255,0,1.0)",
+                borderColor: "rgba(0,255,0,0.1)",
+                data: weeklyCounts
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                yAxes: [{ticks: {beginAtZero: true}}],
+            }
+        }
+    });
+
+    // Monthly chart
+    new Chart("monthlyChart", {
+        type: "line",
+        data: {
+            labels: monthlyLabels,
+            datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(255,0,0,1.0)",
+                borderColor: "rgba(255,0,0,0.1)",
+                data: monthlyCounts
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                yAxes: [{ticks: {beginAtZero: true}}],
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <style>
+        canvas {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Post Creation Data - Daily, Weekly, Monthly</h1>
+
+<!-- Daily Chart -->
+<h3>Daily Posts</h3>
+<canvas id="dailyChart" style="width:100%;max-width:600px"></canvas>
+
+<!-- Weekly Chart -->
+<h3>Weekly Posts</h3>
+<canvas id="weeklyChart" style="width:100%;max-width:600px"></canvas>
+
+<!-- Monthly Chart -->
+<h3>Monthly Posts</h3>
+<canvas id="monthlyChart" style="width:100%;max-width:600px"></canvas>
+
+<script>
+    // Daily Data - Use Django's template system to generate the arrays
+    const dailyLabels = [{% for item in daily_data %}'{{ item.date }}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+    const dailyCounts = [{% for item in daily_data %}{{ item.count }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+
+    // Weekly Data
+    const weeklyLabels = [{% for item in weekly_data %}'{{ item.date }}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+    const weeklyCounts = [{% for item in weekly_data %}{{ item.count }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+
+    // Monthly Data
+    const monthlyLabels = [{% for item in monthly_data %}'{{ item.date }}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+    const monthlyCounts = [{% for item in monthly_data %}{{ item.count }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+
+    // Daily chart
+    new Chart("dailyChart", {
+        type: "line",
+        data: {
+            labels: dailyLabels,
+            datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,0,255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: dailyCounts
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                yAxes: [{ticks: {beginAtZero: true}}],
+            }
+        }
+    });
+
+    // Weekly chart
+    new Chart("weeklyChart", {
+        type: "line",
+        data: {
+            labels: weeklyLabels,
+            datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,255,0,1.0)",
+                borderColor: "rgba(0,255,0,0.1)",
+                data: weeklyCounts
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                yAxes: [{ticks: {beginAtZero: true}}],
+            }
+        }
+    });
+
+    // Monthly chart
+    new Chart("monthlyChart", {
+        type: "line",
+        data: {
+            labels: monthlyLabels,
+            datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(255,0,0,1.0)",
+                borderColor: "rgba(255,0,0,0.1)",
+                data: monthlyCounts
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                yAxes: [{ticks: {beginAtZero: true}}],
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

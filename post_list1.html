@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Creation Data</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <style>
+        canvas {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Post Creation Data</h1>
+
+<!-- Filter dropdown (Daily, Weekly, Monthly) -->
+<form id="filterForm">
+    <label for="filter">Filter:</label>
+    <select name="filter" id="filter">
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+        <option value="monthly">Monthly</option>
+    </select>
+</form>
+
+<!-- Chart -->
+<canvas id="postChart" style="width:100%;max-width:600px"></canvas>
+
+<script>
+    function updateChart(chart, data, label, color) {
+        chart.data.labels = data.labels;
+        chart.data.datasets[0].data = data.counts;
+        chart.data.datasets[0].label = label;
+        chart.data.datasets[0].backgroundColor = color;
+        chart.data.datasets[0].borderColor = color;
+        chart.update();
+    }
+
+    const ctx = document.getElementById('postChart').getContext('2d');
+    let postChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [], // Empty initially
+            datasets: [{
+                label: 'Posts',
+                data: [],
+                fill: true,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                tension: 0.4
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    beginAtZero: true
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    async function fetchData(filterType) {
+        try {
+            const response = await fetch(`/?filter=${filterType}`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+            const data = await response.json();
+            return {
+                labels: data.labels,
+                counts: data.counts
+            };
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+    
+    document.getElementById('filter').addEventListener('change', async function() {
+        const filterType = this.value;
+        const data = await fetchData(filterType);
+
+        let color;
+        if (filterType === 'daily') color = 'rgba(75, 192, 192, 0.2)';
+        else if (filterType === 'weekly') color = 'rgba(153, 102, 255, 0.2)';
+        else color = 'rgba(255, 159, 64, 0.2)';
+
+        updateChart(postChart, data, `${filterType.charAt(0).toUpperCase() + filterType.slice(1)} Posts`, color);
+    });
+
+    // Initial load
+    document.getElementById('filter').dispatchEvent(new Event('change'));
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+{% comment %} <!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <style>
+        canvas {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Post Creation Data - Weekly and Monthly</h1>
+
+<!-- Weekly Chart (by Day of the Week) -->
+<h3>Weekly Posts</h3>
+<canvas id="weeklyChart" style="width:100%;max-width:600px"></canvas>
+
+<!-- Monthly Chart (by Date) -->
+<h3>Monthly Posts</h3>
+<canvas id="monthlyChart" style="width:100%;max-width:600px"></canvas>
+
+<script>
+    // Weekly Data - by Day of the Week
+    const weeklyLabels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const weeklyCounts = [{% for item in weekly_data %}{{ item.count }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+
+    // Monthly Data - by Date
+    const monthlyLabels = [{% for item in monthly_data %}'{{ item.date }}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+    const monthlyCounts = [{% for item in monthly_data %}{{ item.count }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+
+    // Weekly chart (Day of the Week)
+    new Chart("weeklyChart", {
+        type: "line",
+        data: {
+            labels: weeklyLabels,
+            datasets: [{
+                fill: false,
+                backgroundColor: "rgba(0,255,0,1.0)",
+                borderColor: "rgba(0,255,0,0.1)",
+                data: weeklyCounts
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Day of the Week'
+                    }
+                }],
+                yAxes: [{ticks: {beginAtZero: true}}],
+            }
+        }
+    });
+
+    // Monthly chart (Date)
+    new Chart("monthlyChart", {
+        type: "line",
+        data: {
+            labels: monthlyLabels,
+            datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(255,0,0,1.0)",
+                borderColor: "rgba(255,0,0,0.1)",
+                data: monthlyCounts
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Date'
+                    },
+                    ticks: {
+                        autoSkip: true,
+                        maxTicksLimit: 10
+                    }
+                }],
+                yAxes: [{ticks: {beginAtZero: true}}],
+            }
+        }
+    });
+</script>
+
+</body>
+</html> {% endcomment %}

@@ -1,0 +1,616 @@
+Sure! Below are Java programs addressing each of the listed tasks.
+
+### 1. JAVA Program to Print Number Entered by User
+
+```java
+import java.util.Scanner;
+
+public class PrintNumber {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a number: ");
+        int number = scanner.nextInt();
+        System.out.println("You entered: " + number);
+    }
+}
+```
+
+### 2. JAVA Program to Add Two Numbers
+
+```java
+import java.util.Scanner;
+
+public class AddTwoNumbers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter first number: ");
+        int num1 = scanner.nextInt();
+        System.out.println("Enter second number: ");
+        int num2 = scanner.nextInt();
+        int sum = num1 + num2;
+        System.out.println("Sum: " + sum);
+    }
+}
+```
+
+### 3. JAVA Program to Find Quotient and Remainder
+
+```java
+import java.util.Scanner;
+
+public class QuotientRemainder {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter dividend: ");
+        int dividend = scanner.nextInt();
+        System.out.println("Enter divisor: ");
+        int divisor = scanner.nextInt();
+        int quotient = dividend / divisor;
+        int remainder = dividend % divisor;
+        System.out.println("Quotient: " + quotient);
+        System.out.println("Remainder: " + remainder);
+    }
+}
+```
+
+### 4. JAVA Program to Find Size of int, float, double and char in Your System
+
+Java does not have a built-in method to find the size of data types directly because sizes are standardized. However, here is a program that prints their sizes:
+
+```java
+public class SizeOfTypes {
+    public static void main(String[] args) {
+        System.out.println("Size of int: " + (Integer.SIZE / 8) + " bytes");
+        System.out.println("Size of float: " + (Float.SIZE / 8) + " bytes");
+        System.out.println("Size of double: " + (Double.SIZE / 8) + " bytes");
+        System.out.println("Size of char: " + (Character.SIZE / 8) + " bytes");
+    }
+}
+```
+
+### 5. JAVA Program to Swap Two Numbers
+
+```java
+import java.util.Scanner;
+
+public class SwapNumbers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter first number: ");
+        int num1 = scanner.nextInt();
+        System.out.println("Enter second number: ");
+        int num2 = scanner.nextInt();
+        int temp = num1;
+        num1 = num2;
+        num2 = temp;
+        System.out.println("After swapping, first number: " + num1 + ", second number: " + num2);
+    }
+}
+```
+
+### 6. JAVA Program to Swap Two Numbers Without Temporary Variable
+
+```java
+import java.util.Scanner;
+
+public class SwapNumbersNoTemp {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter first number: ");
+        int num1 = scanner.nextInt();
+        System.out.println("Enter second number: ");
+        int num2 = scanner.nextInt();
+        num1 = num1 + num2;
+        num2 = num1 - num2;
+        num1 = num1 - num2;
+        System.out.println("After swapping, first number: " + num1 + ", second number: " + num2);
+    }
+}
+```
+
+### 7. JAVA Program to Check Whether Number is Even or Odd
+
+```java
+import java.util.Scanner;
+
+public class EvenOddCheck {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a number: ");
+        int number = scanner.nextInt();
+        if (number % 2 == 0) {
+            System.out.println(number + " is even.");
+        } else {
+            System.out.println(number + " is odd.");
+        }
+    }
+}
+```
+
+### 8. JAVA Program to Check Vowel or a Consonant Manually
+
+```java
+import java.util.Scanner;
+
+public class VowelConsonantCheck {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a character: ");
+        char ch = scanner.next().charAt(0);
+        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' || 
+            ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U') {
+            System.out.println(ch + " is a vowel.");
+        } else {
+            System.out.println(ch + " is a consonant.");
+        }
+    }
+}
+```
+
+### 9. JAVA Program to Find Largest Number Using if...else Statement
+
+```java
+import java.util.Scanner;
+
+public class LargestNumber {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter first number: ");
+        int num1 = scanner.nextInt();
+        System.out.println("Enter second number: ");
+        int num2 = scanner.nextInt();
+        if (num1 > num2) {
+            System.out.println("Largest number: " + num1);
+        } else {
+            System.out.println("Largest number: " + num2);
+        }
+    }
+}
+```
+
+### 10. JAVA Program to Find the Largest Number Using Nested if...else Statement
+
+```java
+import java.util.Scanner;
+
+public class LargestNumberNestedIf {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter first number: ");
+        int num1 = scanner.nextInt();
+        System.out.println("Enter second number: ");
+        int num2 = scanner.nextInt();
+        System.out.println("Enter third number: ");
+        int num3 = scanner.nextInt();
+        if (num1 >= num2) {
+            if (num1 >= num3) {
+                System.out.println("Largest number: " + num1);
+            } else {
+                System.out.println("Largest number: " + num3);
+            }
+        } else {
+            if (num2 >= num3) {
+                System.out.println("Largest number: " + num2);
+            } else {
+                System.out.println("Largest number: " + num3);
+            }
+        }
+    }
+}
+```
+
+### 11. JAVA Program to Multiply Two Numbers
+
+```java
+import java.util.Scanner;
+
+public class MultiplyTwoNumbers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter first number: ");
+        int num1 = scanner.nextInt();
+        System.out.println("Enter second number: ");
+        int num2 = scanner.nextInt();
+        int product = num1 * num2;
+        System.out.println("Product: " + product);
+    }
+}
+```
+
+### 12. JAVA Program to Make a Simple Calculator to Add, Subtract, Multiply or Divide Using switch...case
+
+```java
+import java.util.Scanner;
+
+public class SimpleCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter first number: ");
+        double num1 = scanner.nextDouble();
+        System.out.println("Enter second number: ");
+        double num2 = scanner.nextDouble();
+        System.out.println("Enter an operator (+, -, *, /): ");
+        char operator = scanner.next().charAt(0);
+        double result;
+        switch (operator) {
+            case '+':
+                result = num1 + num2;
+                break;
+            case '-':
+                result = num1 - num2;
+                break;
+            case '*':
+                result = num1 * num2;
+                break;
+            case '/':
+                if (num2 != 0) {
+                    result = num1 / num2;
+                } else {
+                    System.out.println("Error! Division by zero.");
+                    return;
+                }
+                break;
+            default:
+                System.out.println("Invalid operator!");
+                return;
+        }
+        System.out.println("The result is: " + result);
+    }
+}
+```
+
+### 13. JAVA Program to Find the Length of a String
+
+```java
+import java.util.Scanner;
+
+public class StringLength {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a string: ");
+        String str = scanner.nextLine();
+        System.out.println("Length of the string: " + str.length());
+    }
+}
+```
+
+### 14. JAVA Program to Concatenate Two Strings
+
+```java
+import java.util.Scanner;
+
+public class ConcatenateStrings {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter first string: ");
+        String str1 = scanner.nextLine();
+        System.out.println("Enter second string: ");
+        String str2 = scanner.nextLine();
+        String concatenatedString = str1 + str2;
+        System.out.println("Concatenated String: " + concatenatedString);
+    }
+}
+```
+
+### 15. JAVA Program to Compare Two Strings
+
+```java
+import java.util.Scanner;
+
+public class CompareStrings {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter first string: ");
+        String str1 = scanner.nextLine();
+        System.out.println("Enter second string: ");
+       
+
+ String str2 = scanner.nextLine();
+        if (str1.equals(str2)) {
+            System.out.println("Strings are equal.");
+        } else {
+            System.out.println("Strings are not equal.");
+        }
+    }
+}
+```
+
+### 16. JAVA Program to Find the Sum of ASCII Value of All Characters in the String
+
+```java
+import java.util.Scanner;
+
+public class SumOfAsciiValues {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a string: ");
+        String str = scanner.nextLine();
+        int sum = 0;
+        for (int i = 0; i < str.length(); i++) {
+            sum += (int) str.charAt(i);
+        }
+        System.out.println("Sum of ASCII values: " + sum);
+    }
+}
+```
+
+### 17. Write a Program in JAVA to Find the First 10 Natural Numbers
+
+```java
+public class First10NaturalNumbers {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(i);
+        }
+    }
+}
+```
+
+### 18. Write a Program in JAVA to Check Whether a Number is Prime or Not
+
+```java
+import java.util.Scanner;
+
+public class PrimeNumberCheck {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a number: ");
+        int number = scanner.nextInt();
+        boolean isPrime = true;
+        if (number <= 1) {
+            isPrime = false;
+        } else {
+            for (int i = 2; i <= Math.sqrt(number); i++) {
+                if (number % i == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+        }
+        if (isPrime) {
+            System.out.println(number + " is a prime number.");
+        } else {
+            System.out.println(number + " is not a prime number.");
+        }
+    }
+}
+```
+
+### 19. Write a Program in JAVA to Find the Factorial of a Number
+
+```java
+import java.util.Scanner;
+
+public class Factorial {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a number: ");
+        int number = scanner.nextInt();
+        long factorial = 1;
+        for (int i = 1; i <= number; i++) {
+            factorial *= i;
+        }
+        System.out.println("Factorial of " + number + " is: " + factorial);
+    }
+}
+```
+
+### 20. Write a Program in JAVA to Display a Pattern Like a Right Angle Triangle Using an Asterisk
+
+```java
+import java.util.Scanner;
+
+public class RightAngleTrianglePattern {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the number of rows: ");
+        int rows = scanner.nextInt();
+        for (int i = 1; i <= rows; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+These programs cover a wide range of basic Java programming concepts and should be useful for anyone starting out with Java.from django.shortcuts import render
+from django.utils import timezone
+from datetime import timedelta
+from django.db.models import Count
+from django.db.models.functions import TruncDate
+
+from .models import Post
+
+def post_list(request):
+    today = timezone.now()
+
+    # Filter for today's posts
+    today_posts = Post.objects.filter(created_date__date=today.date())
+
+    # Filter for the current week posts
+    week_start = today - timedelta(days=today.weekday())  # Start of the week (Monday)
+    week_end = week_start + timedelta(days=6)  # End of the week (Sunday)
+    week_posts = Post.objects.filter(created_date__date__range=[week_start, week_end])
+
+    # Filter for the current month posts
+    month_posts = Post.objects.filter(
+        created_date__year=today.year,
+        created_date__month=today.month
+    )
+
+    # Aggregating posts by day (for daily graph)
+    daily_data = today_posts.annotate(date=TruncDate('created_date')).values('date').annotate(count=Count('id')).order_by('date')
+    
+    # Aggregating posts by week (for weekly graph)
+    weekly_data = week_posts.annotate(date=TruncDate('created_date')).values('date').annotate(count=Count('id')).order_by('date')
+
+    # Aggregating posts by month (for monthly graph)
+    monthly_data = month_posts.annotate(date=TruncDate('created_date')).values('date').annotate(count=Count('id')).order_by('date')
+
+    # Pass the data as JSON serializable lists
+    context = {
+        'daily_data': list(daily_data),
+        'weekly_data': list(weekly_data),
+        'monthly_data': list(monthly_data),
+    }
+
+    return render(request, 'blog/post_list1.html', context)
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <style>
+        canvas {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Post Creation Data - Daily, Weekly, Monthly</h1>
+
+<!-- Daily Chart -->
+<h3>Daily Posts</h3>
+<canvas id="dailyChart" style="width:100%;max-width:600px"></canvas>
+
+<!-- Weekly Chart -->
+<h3>Weekly Posts</h3>
+<canvas id="weeklyChart" style="width:100%;max-width:600px"></canvas>
+
+<!-- Monthly Chart -->
+<h3>Monthly Posts</h3>
+<canvas id="monthlyChart" style="width:100%;max-width:600px"></canvas>
+
+<script>
+    // Daily Data - Use Django's template system to generate the arrays
+    const dailyLabels = [{% for item in daily_data %}'{{ item.date }}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+    const dailyCounts = [{% for item in daily_data %}{{ item.count }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+
+    // Weekly Data
+    const weeklyLabels = [{% for item in weekly_data %}'{{ item.date }}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+    const weeklyCounts = [{% for item in weekly_data %}{{ item.count }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+
+    // Monthly Data
+    const monthlyLabels = [{% for item in monthly_data %}'{{ item.date }}'{% if not forloop.last %}, {% endif %}{% endfor %}];
+    const monthlyCounts = [{% for item in monthly_data %}{{ item.count }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+
+    // Daily chart
+    new Chart("dailyChart", {
+        type: "line",
+        data: {
+            labels: dailyLabels,
+            datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,0,255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: dailyCounts
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                yAxes: [{ticks: {beginAtZero: true}}],
+            }
+        }
+    });
+
+    // Weekly chart
+    new Chart("weeklyChart", {
+        type: "line",
+        data: {
+            labels: weeklyLabels,
+            datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,255,0,1.0)",
+                borderColor: "rgba(0,255,0,0.1)",
+                data: weeklyCounts
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                yAxes: [{ticks: {beginAtZero: true}}],
+            }
+        }
+    });
+
+    // Monthly chart
+    new Chart("monthlyChart", {
+        type: "line",
+        data: {
+            labels: monthlyLabels,
+            datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(255,0,0,1.0)",
+                borderColor: "rgba(255,0,0,0.1)",
+                data: monthlyCounts
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                yAxes: [{ticks: {beginAtZero: true}}],
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
+from django.utils import timezone
+from django.db.models.functions import TruncDate
+from django.db.models import Count
+from datetime import timedelta
+
+from django.shortcuts import render
+from django.utils import timezone
+from datetime import timedelta
+from django.db.models import Count
+from django.db.models.functions import TruncDate
+
+from .models import Post
+
+def post_list(request):
+    today = timezone.now()
+
+    # Filter for today's posts
+    today_posts = Post.objects.filter(created_date__date=today.date())
+
+    # Filter for the current week posts
+    week_start = today - timedelta(days=today.weekday())  # Start of the week (Monday)
+    week_end = week_start + timedelta(days=6)  # End of the week (Sunday)
+    week_posts = Post.objects.filter(created_date__date__range=[week_start, week_end])
+
+    # Filter for the current month posts
+    month_posts = Post.objects.filter(
+        created_date__year=today.year,
+        created_date__month=today.month
+    )
+
+    # Aggregating posts by day (for daily graph)
+    daily_data = today_posts.annotate(date=TruncDate('created_date')).values('date').annotate(count=Count('id')).order_by('date')
+    
+    # Aggregating posts by week (for weekly graph)
+    weekly_data = week_posts.annotate(date=TruncDate('created_date')).values('date').annotate(count=Count('id')).order_by('date')
+
+    # Aggregating posts by month (for monthly graph)
+    monthly_data = month_posts.annotate(date=TruncDate('created_date')).values('date').annotate(count=Count('id')).order_by('date')
+
+    # Pass the data as JSON serializable lists
+    context = {
+        'daily_data': list(daily_data),
+        'weekly_data': list(weekly_data),
+        'monthly_data': list(monthly_data),
+    }
+    print(daily_data)
+    return render(request, 'blog/post_list1.html', context)
